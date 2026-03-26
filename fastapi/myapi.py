@@ -37,14 +37,13 @@ def get_student(student_id : int = Path(description="The ID of the student to vi
         return students[student_id]
     else:
         return {"Error": "Student not found"}
-
-#error - key error coming when we try to get student by name because we are trying to access the name key in the students dictionary which is not present. We need to access the name key in the student dictionary which is present in the students dictionary.   
+   
 @app.get("/get-by-name")
-def get_student(*, name:Optional[str] = None, test = int): # we are using optional because we want to make the name parameter optional, if we don't provide the name parameter then it will return all the students.
+def get_student(*, name:Optional[str] = None, test : int): # we are using optional because we want to make the name parameter optional, if we don't provide the name parameter then it will return all the students.
 # * is used to indicate that all the parameters after it are keyword only parameters, which means that they can only be passed as keyword arguments and not as positional arguments. This is useful when we want to make sure that the parameters are passed in a specific order or when we want to make sure that the parameters are passed with a specific name. In this case, we want to make sure that the name parameter is passed with the name "name" and not as a positional argument.
 # test parameter is used to test the optional parameter, if we don't provide the name parameter then it will return all the students, but if we provide the name parameter then it will return the student with that name.
     for student_id in students:
-        if students[student_id][name] == name:
+        if students[student_id]["name"] == name:
             return students[student_id]       
     return {"Data": "Not found"}
 
